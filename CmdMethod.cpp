@@ -2,61 +2,64 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include "Color.h"
+#include "CmdMethod.h"
 using namespace std ;
 
 #ifdef _WIN32
 #include <windows.h>
 #include <conio.h>
+
+HANDLE ScreenOut  = GetStdHandle(STD_OUTPUT_HANDLE) ;    // Standard Output -> Screen
 #endif
 
 
 void GoToXY( int x , int y )
 {
-    #ifdef _WIN32
-        HANDLE Screen_Out  = GetStdHandle(STD_OUTPUT_HANDLE) ;    // Standard Output -> Screen
-        COORD dot = { x , y } ;
-        SetConsoleCursorPosition( Screen_Out , dot );
-    #endif
-    #ifdef __linux__
-       printf("%c[%d;%df",0x1B,y,x);
-    #endif
+#ifdef _WIN32
+    COORD dot = { x , y } ;
+    SetConsoleCursorPosition( ScreenOut , dot );
+#endif
+
+#ifdef __linux__
+    printf("%c[%d;%df",0x1B,y,x);
+#endif
 }
 
-void ColorText( int choose )
+void SetColor( int front , int back )
 {
 #ifdef _WIN32
-   if( choose == Red ) SetConsoleTextAttribute( Screen_Out , RED ) ;
-   else if( choose == Green ) SetConsoleTextAttribute( Screen_Out , GREEN ) ;
-   else if( choose == Blue ) SetConsoleTextAttribute( Screen_Out , BLUE ) ;
-   else if( choose == Yellow ) SetConsoleTextAttribute( Screen_Out , YELLOW ) ;
-   else if( choose == Purple ) SetConsoleTextAttribute( Screen_Out , PURPLE ) ;
-   else if( choose == Cyan ) SetConsoleTextAttribute( Screen_Out , CYAN ) ;
-   else if( choose == White ) SetConsoleTextAttribute( Screen_Out , WHITE ) ;
-   else if( choose == Red+BgOffset ) SetConsoleTextAttribute( Screen_Out , RED_BACK ) ;
-   else if( choose == Green+BgOffset ) SetConsoleTextAttribute( Screen_Out , GREEN_BACK ) ;
-   else if( choose == Blue+BgOffset ) SetConsoleTextAttribute( Screen_Out , BLUE_BACK ) ;
-   else if( choose == Yellow+BgOffset ) SetConsoleTextAttribute( Screen_Out , YELLOW_BACK ) ;
-   else if( choose == Purple+BgOffset ) SetConsoleTextAttribute( Screen_Out , PURPLE_BACK ) ;
-   else if( choose == Cyan+BgOffset ) SetConsoleTextAttribute( Screen_Out , CYAN_BACK ) ;
-   else if( choose == White+BgOffset ) SetConsoleTextAttribute( Screen_Out , WHITE_BACK ) ;
+    SetConsoleTextAttribute(ScreenOut,front+back);
 #endif
+
 #ifdef __linux__
-   printf("\033[%dm",choose) ;
+    printf("\033[%d;%dm",color,front,back) ;
+#endif
+}
+
+void SetColor( int color )
+{
+#ifdef _WIN32
+    SetConsoleTextAttribute(ScreenOut,color);
+#endif
+
+#ifdef __linux__
+    printf("\033[%dm",color) ;
 #endif
 }
 
 
-void DrawSpect( ostream& os ){
-    os << "â–¡" ;
+void DrawSpect( ostream& os )
+{
+    os << "¡¼" ;
 }
-void DrawBlock( ostream& os , int color ){
-    ColorText(color) ;
-    os << "â– " ;
-    ColorText(White) ;
-
+void DrawBlock( ostream& os , int color )
+{
+    SetColor(color) ;
+    os << "¢i" ;
+    SetColor(White) ;
 }
-void DrawSpace( ostream& os ) {
+void DrawSpace( ostream& os )
+{
     cout << "  " ;
 }
 

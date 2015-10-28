@@ -8,7 +8,9 @@ void Block::GainBlock()
 {
     this->SetType( Shape ) ;
 
-    int color = Random(0,5) ;
+    int pick[] = { Red , Green , Blue , Yellow , Purple , Cyan } ;
+    int color = pick[Random(0,5)] ;
+
     if( Random(1,100) <= Prob_Trap )
     	this->SetAtt( (Attribute){Random(7,8),color} ) ;	// Trap
     else
