@@ -1,4 +1,4 @@
-#include "WinCmd.h"
+#include "CmdMethod.h"
 #include "Color.h"
 #include "Block.h"
 #include <iostream>

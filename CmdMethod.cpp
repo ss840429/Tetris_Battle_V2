@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <stdlib.h>
 #include "Color.h"
 using namespace std ;
 
@@ -9,21 +10,21 @@ using namespace std ;
 #include <conio.h>
 #endif
 
-HANDLE Screen_Out  = GetStdHandle(STD_OUTPUT_HANDLE) ;    // Standard Output -> Screen
 
 void GoToXY( int x , int y )
 {
     #ifdef _WIN32
+        HANDLE Screen_Out  = GetStdHandle(STD_OUTPUT_HANDLE) ;    // Standard Output -> Screen
         COORD dot = { x , y } ;
         SetConsoleCursorPosition( Screen_Out , dot );
-    #end if
+    #endif
     #ifdef __linux__
        printf("%c[%d;%df",0x1B,y,x);
     #endif
 }
 
 void ColorText( int choose )
-{
+{/*
     if( choose == Red ) SetConsoleTextAttribute( Screen_Out , RED ) ;
     else if( choose == Green ) SetConsoleTextAttribute( Screen_Out , GREEN ) ;
     else if( choose == Blue ) SetConsoleTextAttribute( Screen_Out , BLUE ) ;
@@ -38,15 +39,16 @@ void ColorText( int choose )
     else if( choose == Purple+num_of_color ) SetConsoleTextAttribute( Screen_Out , PURPLE_BACK ) ;
     else if( choose == Cyan+num_of_color ) SetConsoleTextAttribute( Screen_Out , CYAN_BACK ) ;
     else if( choose == White+num_of_color ) SetConsoleTextAttribute( Screen_Out , WHITE_BACK ) ;
+*/
 }
 
 
 void DrawSpect( ostream& os ){
-    os << "¡¼" ;
+    os << "□" ;
 }
 void DrawBlock( ostream& os , int color ){
     ColorText(color) ;
-    os << "¢i" ;
+    os << "■" ;
     ColorText(White) ;
 
 }

@@ -1,0 +1,17 @@
+bin/
+
+Debug/
+
+Release/
+
+*.o
+
+*.out
+
+*.depend
+
+*.layout
+
+*.exe
+
+lab/

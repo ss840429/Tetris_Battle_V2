@@ -1,7 +1,7 @@
 #ifndef BLOCK_H_INCLUDED
 #define BLOCK_H_INCLUDED
 
-#include "WinCmd.h"
+#include "CmdMethod.h"
 #include "Color.h"
 #include <iostream>
 using namespace std;
