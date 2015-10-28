@@ -45,17 +45,20 @@ void SetColor( int color )
 #endif
 
 #ifdef __linux__
-    printf("\033[%dm",color) ;
+    if( color < 40 )
+        printf("\033[%d;%dm",color,49) ;
+    else
+        printf("\033[%d;%dm",White,color) ;
 #endif
 }
 
 
 void DrawSpect( ostream& os ){
-    os << "¡¼" ;
+    os << "â–¡" ;
 }
 void DrawBlock( ostream& os , int color ){
     SetColor(color) ;
-    os << "¢i" ;
+    os << "â–ˆ" ;
     SetColor(White) ;
 }
 void DrawSpace( ostream& os ){

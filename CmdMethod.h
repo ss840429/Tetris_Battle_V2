@@ -5,8 +5,8 @@
 using namespace std;
 
 #ifdef __linux__
-    enum Color{  Red = 31 ,  Green = 32 ,  Blue = 33 ,  Yellow = 34 ,  Purple = 35 ,  Cyan = 36 ,  White = 37 };
-    enum Bolor{ BRed = 10 , BGreen = 10 , BBlue = 10 , BYellow = 10 , BPurple = 10 , BCyan = 10 , BWhite = 10 };
+    enum Color{  Black = 30 ,  Red = 31 ,  Green = 32 ,  Blue = 34 ,  Yellow = 33 ,  Purple = 35 ,  Cyan = 36 ,  White = 37 };
+    enum Bolor{ BBlack = 40 , BRed = 41 , BGreen = 42 , BBlue = 44 , BYellow = 43 , BPurple = 45 , BCyan = 46 , BWhite = 47 };
 #endif
 
 #ifdef _WIN32
