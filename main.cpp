@@ -6,7 +6,7 @@ int main()
 {
     Block g ;
     g.SetType(Shape) ;
-    g.SetAtt( (Attribute){2,2} );
+    g.SetAtt( (Attribute){2,BgOffset+Red} );
     cout << g <<g<<g<<g<<endl<<g<<g;
     return 0 ;
 }

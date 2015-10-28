@@ -25,6 +25,6 @@
 
 /* refer */
 
-enum Color{ Red = 0 , Green , Blue , Yellow , Purple , Cyan , White , num_of_color } ;
+enum Color{ Red = 31 , Green , Blue , Yellow , Purple , Cyan , White , BgOffset = 10 } ;
 
 #endif // COLOR_H_INCLUDED
