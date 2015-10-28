@@ -32,7 +32,7 @@ void SetColor( int front , int back )
 #endif
 
 #ifdef __linux__
-    printf("\033[%d;%dm",color,front,back) ;
+    printf("\033[%d;%dm",front,back) ;
 #endif
 }
 
@@ -40,6 +40,8 @@ void SetColor( int color )
 {
 #ifdef _WIN32
     SetConsoleTextAttribute(ScreenOut,color);
+    if( color > 100 ) // background
+        SetConsoleTextAttribute(ScreenOut,color+White);
 #endif
 
 #ifdef __linux__
@@ -48,18 +50,15 @@ void SetColor( int color )
 }
 
 
-void DrawSpect( ostream& os )
-{
+void DrawSpect( ostream& os ){
     os << "¡¼" ;
 }
-void DrawBlock( ostream& os , int color )
-{
+void DrawBlock( ostream& os , int color ){
     SetColor(color) ;
     os << "¢i" ;
     SetColor(White) ;
 }
-void DrawSpace( ostream& os )
-{
+void DrawSpace( ostream& os ){
     cout << "  " ;
 }
 

@@ -1,5 +1,4 @@
 #include "CmdMethod.h"
-#include "Color.h"
 #include "Block.h"
 #include <iostream>
 using namespace std;

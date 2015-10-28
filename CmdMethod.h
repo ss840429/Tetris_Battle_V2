@@ -1,7 +1,6 @@
 #ifndef WINCMD_H_INCLUDED
 #define WINCMD_H_INCLUDED
 
-#include "Color.h"
 #include <iostream>
 using namespace std;
 

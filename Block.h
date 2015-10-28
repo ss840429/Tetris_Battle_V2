@@ -2,7 +2,6 @@
 #define BLOCK_H_INCLUDED
 
 #include "CmdMethod.h"
-#include "Color.h"
 #include <iostream>
 using namespace std;
 
