@@ -34,8 +34,8 @@
 		<Unit filename="Block.cpp" />
 		<Unit filename="Block.h" />
 		<Unit filename="Color.h" />
-		<Unit filename="WinCmd.cpp" />
-		<Unit filename="WinCmd.h" />
+		<Unit filename="CmdMethod.cpp" />
+		<Unit filename="CmdMethod.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

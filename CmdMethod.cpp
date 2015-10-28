@@ -1,15 +1,25 @@
-#include <windows.h>
-#include <conio.h>
+
 #include <iostream>
+#include <stdio.h>
 #include "Color.h"
 using namespace std ;
+
+#ifdef _WIN32
+#include <windows.h>
+#include <conio.h>
+#endif
 
 HANDLE Screen_Out  = GetStdHandle(STD_OUTPUT_HANDLE) ;    // Standard Output -> Screen
 
 void GoToXY( int x , int y )
 {
-    COORD dot = { x , y } ;
-    SetConsoleCursorPosition( Screen_Out , dot );
+    #ifdef _WIN32
+        COORD dot = { x , y } ;
+        SetConsoleCursorPosition( Screen_Out , dot );
+    #end if
+    #ifdef __linux__
+       printf("%c[%d;%df",0x1B,y,x);
+    #endif
 }
 
 void ColorText( int choose )
@@ -32,11 +42,11 @@ void ColorText( int choose )
 
 
 void DrawSpect( ostream& os ){
-    os << "¡¼" ;
+    os << "Â¡Â¼" ;
 }
 void DrawBlock( ostream& os , int color ){
     ColorText(color) ;
-    os << "¢i" ;
+    os << "Â¢i" ;
     ColorText(White) ;
 
 }
