@@ -54,11 +54,11 @@ void SetColor( int color )
 
 
 void DrawSpect( ostream& os ){
-    os << "â–¡" ;
+    os << "¡¼" ;
 }
 void DrawBlock( ostream& os , int color ){
     SetColor(color) ;
-    os << "â–ˆ" ;
+    os << "¢i" ;
     SetColor(White) ;
 }
 void DrawSpace( ostream& os ){
