@@ -13,7 +13,7 @@ int main()
     cout << g << endl ;
 
     g.SetType(Shape) ;
-    g.SetAtt( (Attribute){2,Yellow} );
+    g.SetAtt( (Attribute){2,Red} );
 
 
 
