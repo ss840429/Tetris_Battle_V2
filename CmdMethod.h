@@ -14,16 +14,21 @@ using namespace std;
     enum Bolor{ BRed = 192 , BGreen = 160 , BBlue = 144 , BYellow = 224 , BPurple = 208 , BCyan = 176 , BWhite = 240 };
 #endif
 
+enum Key { Enter = 13 , Up = 72 , Down = 80 , Left = 75 , Right = 77 , Space = 32 , C = 99 , Pause = 112 , ESC = 27 } ;
+
+
 void GoToXY( int x , int y ) ;
+int GetKeyboardInput() ;
 
 void SetColor( int front , int back ) ;
 void SetColor( int color ) ;
+void HighLightText( char t[] ) ;
 
 void DrawSpect( ostream& os ) ;
 void DrawBlock( ostream& os , int color ) ;
 void DrawSpace( ostream& os ) ;
 
 int Random( int ln , int un ) ;
-
+void CleanScreen() ;
 
 #endif // WINCMD_H_INCLUDED

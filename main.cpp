@@ -15,9 +15,6 @@ int main()
     g.SetType(Shape) ;
     g.SetAtt( (Attribute){2,Yellow} );
 
-
-
-
     for(int i = 0 ; i < 31 ; i ++ )
     {
         cout << g  ;
