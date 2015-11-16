@@ -32,5 +32,15 @@ int main()
     cout << "12345" ;
     SetColor(Green) ;
 
+    int a = 0;
+    while(1)
+    {
+        a = GetKeyboardInput();
+        if (a != 0)
+        {
+            cout << a << " ";
+        }
+    }
+
     return 0 ;
 }

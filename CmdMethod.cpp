@@ -12,6 +12,11 @@ using namespace std ;
 HANDLE ScreenOut  = GetStdHandle(STD_OUTPUT_HANDLE) ;    // Standard Output -> Screen
 #endif // _WIN32
 
+#ifdef __linux__
+char getch(void);
+int kbhit(void);
+#endif
+
 
 void GoToXY( int x , int y )
 {
@@ -27,13 +32,11 @@ void GoToXY( int x , int y )
 
 int GetKeyboardInput()
 {
-#ifdef _WIN32
-    if ( kbhit( ) ) /* kbhit() -> if have input */
-    {
-        return (int)getch() ;
-    }
-    return 0 ;
-#endif // _WIN32
+  if ( kbhit( ) ) /* kbhit() -> if have input */
+  {
+      return (int)getch() ;
+  }
+  return 0 ;
 }
 
 void SetColor( int front , int back )
@@ -127,16 +130,16 @@ int kbhit(void)
   return 0;
 }
 
-static struct termios old, new;
+static struct termios old, newwlog;
 
 /* Initialize new terminal i/o settings */
 void initTermios(int echo)
 {
   tcgetattr(0, &old); /* grab old terminal i/o settings */
-  new = old; /* make new settings same as old settings */
-  new.c_lflag &= ~ICANON; /* disable buffered i/o */
-  new.c_lflag &= echo ? ECHO : ~ECHO; /* set echo mode */
-  tcsetattr(0, TCSANOW, &new); /* use these new terminal i/o settings now */
+  newwlog = old; /* make new settings same as old settings */
+  newwlog.c_lflag &= ~ICANON; /* disable buffered i/o */
+  newwlog.c_lflag &= echo ? ECHO : ~ECHO; /* set echo mode */
+  tcsetattr(0, TCSANOW, &newwlog); /* use these new terminal i/o settings now */
 }
 
 /* Restore old terminal i/o settings */
