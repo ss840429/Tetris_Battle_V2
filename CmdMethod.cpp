@@ -72,16 +72,22 @@ void HighlightText( char t[] )
     cout << t ;
     SetColor(White) ;
 }
-
-void DrawSpect( ostream& os ){
-    os << "¡¼" ;
-}
-void DrawBlock( ostream& os , int color ){
-    SetColor(color) ;
-    os << "¢i" ;
+void ColorText( char t[] , int color )
+{
+    SetColor( color ) ;
+    cout << t ;
     SetColor(White) ;
 }
-void DrawSpace( ostream& os ){
+
+void DrawSpect( ){
+    cout << "¡¼" ;
+}
+void DrawBlock( int color ){
+    SetColor(color) ;
+    cout << "¢i" ;
+    SetColor(White) ;
+}
+void DrawSpace(  ){
     cout << "  " ;
 }
 

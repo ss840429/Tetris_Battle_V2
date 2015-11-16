@@ -5,6 +5,7 @@ using namespace std;
 
 void Block::GainBlock()
 {
+    this->Init() ;
     this->SetType( Shape ) ;
 
     int pick[] = { Red , Green , Blue , Yellow , Purple , Cyan } ;
@@ -16,51 +17,84 @@ void Block::GainBlock()
     	this->SetAtt( (Attribute){Random(0,6),color} ) ;	// Basic
 }
 
-ostream& operator <<( ostream& os , const Block& block ) {
-    if( block.type_ == Spect )
-        DrawSpect( os ) ;
-    else if( block.type_ != None )
-        DrawBlock( os , block.att_.color ) ;
+const void Block::Print() const {
+    if( type_ == Spect )
+        DrawSpect( ) ;
+    else if( type_ != None )
+        DrawBlock( att_.color ) ;
     else
-        DrawSpace( os ) ;
+        DrawSpace() ;
+}
+ostream & operator << (ostream &os, const Block& block )
+{
+    block.Print() ;
     return os ;
 }
 
 GameBoard::GameBoard(){
 	sizeX_ = SIZE_X , sizeY_ = SIZE_Y ;
 
-	gameBoard_ = new Block[SIZE_X*SIZE_Y] ;
-	if( gameBoard_ == NULL )
+	gameBoard_ = new Block*[sizeX_] ;
+	if( gameBoard_ == nullptr )
 		sizeX_ = 0 , sizeY_ = 0 ;
-}
-GameBoard::GameBoard( int sizeX , int sizeY ) {
-	sizeX_ = sizeX , sizeY_ = sizeY ;
 
-	gameBoard_ = new Block[sizeX*sizeY] ;
-	if( gameBoard_ == NULL )
+    for( int i = 0 ; i < sizeX_ ; ++i  )
+    {
+        gameBoard_[i] = new Block[sizeY_] ;
+        if( gameBoard_[i] == nullptr )
+        {
+            for( int j = 0 ; j < i ; ++j )
+                delete[] gameBoard_[j] ;
+            delete[] gameBoard_ ;
+            sizeX_ = 0 , sizeY_ = 0 ;
+        }
+    }
+}
+GameBoard::GameBoard( int X , int Y ) {
+	sizeX_ = X , sizeY_ = Y ;
+
+	gameBoard_ = new Block*[sizeX_] ;
+	if( gameBoard_ == nullptr )
 		sizeX_ = 0 , sizeY_ = 0 ;
+
+    for( int i = 0 ; i < sizeX_ ; ++i  )
+    {
+        gameBoard_[i] = new Block[sizeY_] ;
+        if( gameBoard_[i] == nullptr )
+        {
+            for( int j = 0 ; j < i ; ++j )
+                delete[] gameBoard_[j] ;
+            delete[] gameBoard_ ;
+            sizeX_ = 0 , sizeY_ = 0 ;
+        }
+    }
 }
 GameBoard::~GameBoard() {
+    for( int i = 0 ; i < sizeX_ ; ++i )
+        delete[] gameBoard_[i] ;
 	delete [] gameBoard_ ;
 }
 
 void GameBoard::Init() {
-	for( int i = 0 ; i < SIZE_X*SIZE_Y ; i ++ )
-        gameBoard_[i].Init() ;
+    cout << sizeX_ << sizeY_ ;
+	for( int i = 0 ; i < sizeX_ ; ++i )
+        for( int j = 0 ; j < sizeY_ ; ++j )
+            gameBoard_[i][j].Init() ;
 }
 bool GameBoard::IsEmpty() const{
-	for( int i = 0 ; i < SIZE_X*SIZE_Y ; i ++ )
-		if(  gameBoard_[i].GetType() == Shape ||  gameBoard_[i].GetType() == Lock )
-			return false ;
+	for( int i = 0 ; i < sizeX_ ; ++i )
+        for( int j = 0 ; i < sizeY_ ; ++j )
+            if(  gameBoard_[i][j].GetType() == Shape ||  gameBoard_[i][j].GetType() == Lock )
+                return false ;
 
 	return true ;
 }
 void GameBoard::Print( int PointX , int PointY ) const{
-	for( int i = 4 ; i < SIZE_Y; i ++ )
+	for( int i = 4 ; i < sizeX_; ++i )
     {
         GoToXY( PointX , PointY+i-4 ) ;
-        for( int j = 0 ; j < SIZE_X ; j ++ )
-         	cout << gameBoard_[j+i*SIZE_X] ;
+        for( int j = 0 ; j < sizeY_ ; ++j )
+         	gameBoard_[i][j].Print() ;
     }
 }
 

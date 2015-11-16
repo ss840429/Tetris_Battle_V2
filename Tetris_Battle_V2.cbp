@@ -35,6 +35,9 @@
 		<Unit filename="Block.h" />
 		<Unit filename="CmdMethod.cpp" />
 		<Unit filename="CmdMethod.h" />
+		<Unit filename="Game.cpp" />
+		<Unit filename="Game.h" />
+		<Unit filename="Loc.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

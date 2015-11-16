@@ -7,12 +7,12 @@ using namespace std;
 
 enum BTYPE { None , Shape , Lock , Spect } ;
 
-const int SIZE_X = 10 ;
-const int SIZE_Y = 24 ;  // 20+4( board+buffer )
+const int SIZE_X = 24 ;   // 20+4( board+buffer )
+const int SIZE_Y = 10 ;
 const int Prob_Trap = 2 ; // x of 100%
 
 
-const bool bricks[9][16] =  {
+const bool Bricks[9][16] =  {
                             {0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0},      // Square
                             {0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0},      // Line
                             {0,0,0,0,0,1,1,0,1,1,0,0,0,0,0,0},      // _|-
@@ -56,6 +56,7 @@ class Block{
         const BTYPE& GetType() const{
         	return type_ ;
         }
+        const void Print() const ;
 
 	private:
 		Attribute att_ ;
@@ -76,19 +77,18 @@ class GameBoard{
 		void Init() ;
 		Block& GetBlock( int locX , int locY ){
 			if( IsValid( locX , locY ) )
-				return gameBoard_[locX+locY*SIZE_X] ;
+				return gameBoard_[locX][locY] ;
 			else
-				return gameBoard_[0] ;
+				return gameBoard_[0][0] ;
 		}
-
 
 		bool IsEmpty() const ;
 		void Print( int PointX , int PointY ) const ;
 		bool IsValid( int locX , int locY ) const{
-			return ( 0<=locX+locY*SIZE_X && locX+locY*SIZE_X<SIZE_X*SIZE_Y ) ;
+			return ( 0<=locX&&locX<sizeX_&&0<=locY&&locY<sizeY_ ) ;
 		}
 	private:
-		Block* gameBoard_ ;
+		Block** gameBoard_ ;
 		int sizeX_ , sizeY_ ;
 
 } ;

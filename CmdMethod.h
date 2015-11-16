@@ -25,10 +25,11 @@ int GetKeyboardInput() ;
 void SetColor( int front , int back ) ;
 void SetColor( int color ) ;
 void HighLightText( char t[] ) ;
+void ColorText( char t[] , int color ) ;
 
-void DrawSpect( ostream& os ) ;
-void DrawBlock( ostream& os , int color ) ;
-void DrawSpace( ostream& os ) ;
+void DrawSpect( ) ;
+void DrawBlock( int color ) ;
+void DrawSpace( ) ;
 
 int Random( int ln , int un ) ;
 void CleanScreen() ;
