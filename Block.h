@@ -3,6 +3,7 @@
 
 #include "CmdMethod.h"
 #include <iostream>
+#include <exception>
 using namespace std;
 
 enum BTYPE { None , Shape , Lock , Spect } ;
@@ -30,7 +31,6 @@ struct Attribute{
 } ;
 
 class Block{
-    friend ostream & operator << (ostream &os, const Block& block ) ;
 
 	public:
 		void Init(){
@@ -70,8 +70,8 @@ class Block{
 class GameBoard{
 
 	public:
-		GameBoard() ;
-		GameBoard( int sizeX , int sizeY ) ;
+		GameBoard():GameBoard(SIZE_X,SIZE_Y) {};
+		GameBoard( int X , int Y ) ;
 		~GameBoard() ;
 
 		void Init() ;
@@ -79,7 +79,7 @@ class GameBoard{
 			if( IsValid( locX , locY ) )
 				return gameBoard_[locX][locY] ;
 			else
-				return gameBoard_[0][0] ;
+				throw "非法存取元素\n\n" ;
 		}
 
 		bool IsEmpty() const ;

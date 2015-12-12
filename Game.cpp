@@ -36,7 +36,6 @@ void Game(Mode M)
     ShowForm() ;
 
 
-
     do{
         ShowNextBlock( Next ) ;
         ShowHoldBlock( Hold ) ;

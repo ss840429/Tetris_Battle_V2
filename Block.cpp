@@ -25,49 +25,25 @@ const void Block::Print() const {
     else
         DrawSpace() ;
 }
-ostream & operator << (ostream &os, const Block& block )
-{
-    block.Print() ;
-    return os ;
-}
 
-GameBoard::GameBoard(){
-	sizeX_ = SIZE_X , sizeY_ = SIZE_Y ;
-
-	gameBoard_ = new Block*[sizeX_] ;
-	if( gameBoard_ == nullptr )
-		sizeX_ = 0 , sizeY_ = 0 ;
-
-    for( int i = 0 ; i < sizeX_ ; ++i  )
-    {
-        gameBoard_[i] = new Block[sizeY_] ;
-        if( gameBoard_[i] == nullptr )
-        {
-            for( int j = 0 ; j < i ; ++j )
-                delete[] gameBoard_[j] ;
-            delete[] gameBoard_ ;
-            sizeX_ = 0 , sizeY_ = 0 ;
-        }
-    }
-}
 GameBoard::GameBoard( int X , int Y ) {
-	sizeX_ = X , sizeY_ = Y ;
-
-	gameBoard_ = new Block*[sizeX_] ;
-	if( gameBoard_ == nullptr )
-		sizeX_ = 0 , sizeY_ = 0 ;
-
-    for( int i = 0 ; i < sizeX_ ; ++i  )
-    {
-        gameBoard_[i] = new Block[sizeY_] ;
-        if( gameBoard_[i] == nullptr )
-        {
-            for( int j = 0 ; j < i ; ++j )
+    int i = -1 ;
+	try{
+        gameBoard_ = new Block*[sizeX_] ;
+        for( i = 0 ; i < X ; ++i  )
+            gameBoard_[i] = new Block[Y] ;
+        sizeX_ = X , sizeY_ = Y ;
+	}
+	catch( bad_alloc e ){
+        cerr << e.what() ;
+        if( i != -1 ){
+            for( int j = 0 ; j < i ; ++j ){
                 delete[] gameBoard_[j] ;
+            }
             delete[] gameBoard_ ;
-            sizeX_ = 0 , sizeY_ = 0 ;
         }
-    }
+        sizeX_ = 0 , sizeY_ = 0 ;
+	}
 }
 GameBoard::~GameBoard() {
     for( int i = 0 ; i < sizeX_ ; ++i )
@@ -86,7 +62,6 @@ bool GameBoard::IsEmpty() const{
         for( int j = 0 ; i < sizeY_ ; ++j )
             if(  gameBoard_[i][j].GetType() == Shape ||  gameBoard_[i][j].GetType() == Lock )
                 return false ;
-
 	return true ;
 }
 void GameBoard::Print( int PointX , int PointY ) const{

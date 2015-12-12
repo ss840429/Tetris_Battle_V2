@@ -171,10 +171,6 @@ char getch(void)
 }
 
 /* Read 1 character with echo */
-char getche(void)
-{
-  return getch_(1);
-}
 
 #endif // __linux__
 
