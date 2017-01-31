@@ -12,7 +12,7 @@ void ShowNextBlock( Block ) ;
 void ShowHoldBlock( Block ) ;
 void ShowScore( int total_score , int total_line , int combo ) ;
 void ShowForm() ;
-
+void EraseLine( GameBoard& gb, int& score, int& line, int& combo ) ;
 
 
 constexpr int level_time = 1000 ;                           /* ms -> speed */
@@ -72,7 +72,7 @@ void Game(Mode M)
 
         if( next )
         {
-            //EraseLine( board , Score , line , Combo ) ;
+            EraseLine( gb, score, line, combo ) ;
             Cur = Next , Next.GainBlock() ;
             changable = true ;
             LoadToBuffer( gb, Cur ) ;
@@ -85,16 +85,16 @@ void Game(Mode M)
 
 void ShowForm()
 {
-    GoToXY( Form_X+6 , Form_Y-1 ) ;
+    GoToXY( Form_X+6, Form_Y-1 ) ;
     ColorText( " Y  O  U  R  " , Yellow ) ;
     if( mode == Multi )
     {
-        GoToXY( Form_X2+7 , Form_Y2-1 ) ;
+        GoToXY( Form_X2+7, Form_Y2-1 ) ;
         ColorText( " R I V A L" , Yellow ) ;
     }
     for( int i = 0 ; i < SIZE_X -2 ; ++i ) /* Main Form */
     {
-        GoToXY( Form_X , Form_Y + i ) ;
+        GoToXY( Form_X, Form_Y + i ) ;
         for( int j = 0 ; j < SIZE_Y + 2 ; ++j  )
             if( i == 0 || i == SIZE_X-3 || j == 0 || j == SIZE_Y+1 )
                 DrawBlock(White) ;
@@ -103,7 +103,7 @@ void ShowForm()
 
         if( mode == Multi )
         {
-            GoToXY( Form_X2 , Form_Y2 + i ) ;
+            GoToXY( Form_X2, Form_Y2 + i ) ;
             for( int j = 0 ; j < SIZE_Y + 2 ; ++j )
                 if( i == 0 || i == SIZE_X-3 || j == 0 || j == SIZE_Y+1 )
                     DrawBlock(White) ;
@@ -113,7 +113,7 @@ void ShowForm()
     }
     for( int i = 0 ; i < 7 ; ++i )
     {
-        GoToXY( Next_X , Next_Y+i ) ;    /* Next Form */
+        GoToXY( Next_X, Next_Y+i ) ;    /* Next Form */
         if( !i )
         {
             ColorText( " N  E  X  T  " , Yellow ) ;
@@ -130,7 +130,7 @@ void ShowForm()
             DrawBlock( White ) ;
         }
 
-        GoToXY( Hold_X , Hold_Y+i ) ;    /* Hold Form */
+        GoToXY( Hold_X, Hold_Y+i ) ;    /* Hold Form */
         if( !i )
         {
             ColorText( " H  O  L  D  " , Yellow ) ;
@@ -150,15 +150,16 @@ void ShowForm()
 }
 void ShowBoard( GameBoard& gb )
 {
-    gb.Print( Form_X+2 ,Form_Y+1 );
+    gb.Print( Form_X+2, Form_Y+1 );
+    GoToXY( 0, 0 ) ;
 }
 void ShowScore( int score , int line , int combo )
 {
-    GoToXY( Score_X , Score_Y ) ;
+    GoToXY( Score_X, Score_Y ) ;
     cout << "Score : " << score ;
-    GoToXY( Score_X , Score_Y+2 ) ;
+    GoToXY( Score_X, Score_Y+2 ) ;
     cout << "Cleared : " << line ;
-    GoToXY( Score_X , Score_Y+4 ) ;
+    GoToXY( Score_X, Score_Y+4 ) ;
     cout << "Combo : " << combo ;
 }
 void ShowNextBlock( Block next )
@@ -189,6 +190,37 @@ void ShowHoldBlock( Block hold )
     }
 }
 
+void EraseLine( GameBoard& gb, int& score, int& line, int& combo )
+{
+    int add = 0 ;
+    int i , j ;   /* For loop */
+
+    for( i = SIZE_X-1 ; i > 3 ; --i )
+    {
+        int check = 0 ;
+        for( j = 0 ; j < SIZE_Y ; ++j )
+        {
+            if( gb.GetBlock(i,j).GetType() == Lock ) check ++ ;
+        }
+
+        if( check == SIZE_Y )
+        {
+            add += 1;
+
+            for( j = i ; j > 4 ; --j )
+            {
+                for( int k = 0 ; k < SIZE_Y  ; ++k )
+                    MoveBlock( gb, j-1, k, j, k ) ;
+            }
+            i += 1 ;
+        }
+    }
+
+    score += Lscore[add]*(1+combo) ;
+    line += add ;
+    if( add == 0 ) combo = 0 ;
+    else combo += 1 ;
+}
 
 void PMode( Mode M )
 {
