@@ -46,9 +46,10 @@ GameBoard::GameBoard( int X , int Y ) {
 	}
 }
 GameBoard::~GameBoard() {
-    for( int i = 0 ; i < sizeX_ ; ++i )
+    for( int i = 0 ; i < sizeX_ ; ++i ){
         delete[] gameBoard_[i] ;
-	delete [] gameBoard_ ;
+    }
+	delete[] gameBoard_ ;
 }
 
 void GameBoard::Init() {

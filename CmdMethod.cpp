@@ -68,13 +68,13 @@ void SetColor( int color )
 #endif // __linux__
 }
 
-void HighlightText( char t[] )
+void HighlightText( const char t[] )
 {
     SetColor( Black , Yellow ) ;
     cout << t ;
     SetColor(White) ;
 }
-void ColorText( char t[] , int color )
+void ColorText( const char t[] , int color )
 {
     SetColor( color ) ;
     cout << t ;

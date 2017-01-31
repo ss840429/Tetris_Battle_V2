@@ -79,7 +79,6 @@ void Game(Mode M)
         }
 
     }while (true) ;
-
 }
 
 

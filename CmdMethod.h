@@ -24,8 +24,8 @@ int GetKeyboardInput() ;
 
 void SetColor( int front , int back ) ;
 void SetColor( int color ) ;
-void HighLightText( char t[] ) ;
-void ColorText( char t[] , int color ) ;
+void HighLightText( const char t[] ) ;
+void ColorText( const char t[] , int color ) ;
 
 void DrawSpect( ) ;
 void DrawBlock( int color ) ;
