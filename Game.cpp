@@ -13,6 +13,7 @@ void ShowHoldBlock( Block ) ;
 void ShowScore( int total_score , int total_line , int combo ) ;
 void ShowForm() ;
 void EraseLine( GameBoard& gb, int& score, int& line, int& combo ) ;
+bool GameOver( GameBoard& gb );
 
 
 constexpr int level_time = 1000 ;                           /* ms -> speed */
@@ -64,6 +65,22 @@ void Game(Mode M)
                 AllDown( gb ) ;
                 next = true ;
             }
+            if( interact == C && changable )     /* C - Hold */
+            {
+                RemShape(gb) ;
+                if( Hold.GetType() == None )  /* Fisrt Hold */
+                {
+                    Hold = Cur ;
+                    next = true ;
+                }
+                else                        /* Swap Hold with Current */
+                {
+                    std::swap( Hold, Cur ) ;
+                    changable = false ;
+                    LoadToBuffer( gb, Cur ) ;
+                }
+                break;
+            }
 
 
             if( interact != 0 ) ShowBoard( gb ) ;   // Refresh
@@ -78,7 +95,9 @@ void Game(Mode M)
             LoadToBuffer( gb, Cur ) ;
         }
 
-    }while (true) ;
+    }while (!GameOver(gb)) ;
+
+
 }
 
 
@@ -219,6 +238,14 @@ void EraseLine( GameBoard& gb, int& score, int& line, int& combo )
     line += add ;
     if( add == 0 ) combo = 0 ;
     else combo += 1 ;
+}
+bool GameOver( GameBoard& board )
+{
+    for( int i = 0 ; i < SIZE_Y ; ++i )
+        if( board.GetBlock(3,i).GetType() == Lock )
+            return true ;
+
+    return false ;
 }
 
 void PMode( Mode M )

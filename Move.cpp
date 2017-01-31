@@ -96,4 +96,10 @@ void AllDown( GameBoard& gb )
 }
 void Rotate( GameBoard& ) ;
 void Showpect( GameBoard& gb ) ;
-void RemShape( GameBoard& gb ) ;
+void RemShape( GameBoard& gb )
+{
+    for( int i = 0 ; i < SIZE_X ; ++i )
+        for( int j = 0 ; j < SIZE_Y ; ++j )
+            if( gb.GetBlock(i,j).GetType() == Shape )
+                gb.GetBlock(i,j).Init() ;
+}
