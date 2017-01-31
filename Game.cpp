@@ -2,8 +2,10 @@
 #include "Block.h"
 #include "Loc.h"
 #include "Game.h"
-#include <time.h>
+#include "Move.h"
 #include <stdlib.h>
+#include <algorithm>
+#include <time.h>
 
 void ShowBoard( GameBoard& gb ) ;
 void ShowNextBlock( Block ) ;
@@ -15,23 +17,24 @@ void ShowForm() ;
 
 constexpr int level_time = 1000 ;                           /* ms -> speed */
 constexpr int max_level_time = 150 ;
-constexpr int Lscore[5] = { 0 , 20 , 100 , 250 , 500 } ;     /* Value of erasing each line */
+constexpr int Lscore[5] = { 0, 20, 100, 250, 500 } ;     /* Value of erasing each line */
 Mode mode = Single ;
 
 void Game(Mode M)
 {
+    srand(time(0));
     PMode( M ) ;
 
     CleanScreen() ;
     GameBoard gb ; gb.Init() ;
 
-    Block Cur , Next , Hold ;
-    Cur.GainBlock() , Next.GainBlock() ; Hold.Init() ;
-//    LoadToBuffer( gb , Cur ) ;
+    Block Cur, Next, Hold ;
+    Cur.GainBlock(), Next.GainBlock(); Hold.Init() ;
+    LoadToBuffer( gb , Cur ) ;
 
-    int score = 0 , line = 0 , combo = 0 ;
-    int timecounter = 0 , netcounter = 0 ;
-    bool next , changable = true ;
+    int score = 0, line = 0, combo = 0 ;
+    int timecounter = 0;
+    bool next, changable = true ;
 
     ShowForm() ;
 
@@ -45,7 +48,28 @@ void Game(Mode M)
         timecounter = clock() ;
         next = false ;
 
-    }while (1) ;
+        do{
+            int interact = GetKeyboardInput() ;   /* User input */
+
+            if( interact == Down || clock() - timecounter >= std::max( level_time - line*4 , max_level_time )*CLOCKS_PER_SEC/1000  ) /* down */
+            {
+                timecounter = clock() ;   /* reset time for next */
+                next = !MoveDown( gb ) ;
+                if( next ) Delay(100) ;
+                ShowBoard( gb ) ;
+            }
+
+        }while(!next);
+
+        if( next )
+        {
+            //EraseLine( board , Score , line , Combo ) ;
+            Cur = Next , Next.GainBlock() ;
+            changable = true ;
+            LoadToBuffer( gb, Cur ) ;
+        }
+
+    }while (true) ;
 
 }
 
@@ -57,7 +81,7 @@ void ShowForm()
     if( mode == Multi )
     {
         GoToXY( Form_X2+7 , Form_Y2-1 ) ;
-       ColorText( " R I V A L" , Yellow ) ;
+        ColorText( " R I V A L" , Yellow ) ;
     }
     for( int i = 0 ; i < SIZE_X -2 ; ++i ) /* Main Form */
     {

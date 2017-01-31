@@ -52,7 +52,6 @@ GameBoard::~GameBoard() {
 }
 
 void GameBoard::Init() {
-    cout << sizeX_ << sizeY_ ;
 	for( int i = 0 ; i < sizeX_ ; ++i )
         for( int j = 0 ; j < sizeY_ ; ++j )
             gameBoard_[i][j].Init() ;

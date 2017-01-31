@@ -13,6 +13,8 @@ HANDLE ScreenOut  = GetStdHandle(STD_OUTPUT_HANDLE) ;    // Standard Output -> S
 #endif // _WIN32
 
 #ifdef __linux__
+#include <unistd.h>
+
 char getch(void);
 int kbhit(void);
 #endif
@@ -100,6 +102,16 @@ void DrawSpace(  ){
 int Random( int ln , int un )
 {
     return rand()%(un-ln+1) + ln ;
+
+}
+void Delay( int ms )
+{
+#ifdef _WIN32
+    Sleep(ms);
+#endif // _WIN32
+#ifdef __linux__
+    usleep(ms);
+#endif // __linux__
 }
 
 void CleanScreen()

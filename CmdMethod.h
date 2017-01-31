@@ -32,6 +32,7 @@ void DrawBlock( int color ) ;
 void DrawSpace( ) ;
 
 int Random( int ln , int un ) ;
+void Delay( int ms );
 void CleanScreen() ;
 #ifdef __linux__
 
