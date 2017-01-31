@@ -79,7 +79,7 @@ class GameBoard{
 			if( IsValid( locX , locY ) )
 				return gameBoard_[locX][locY] ;
 			else
-				throw "非法存取元素\n\n" ;
+				throw "Invalid position\n\n" ;
 		}
 
 		bool IsEmpty() const ;

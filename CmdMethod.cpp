@@ -80,11 +80,17 @@ void ColorText( char t[] , int color )
 }
 
 void DrawSpect( ){
-    cout << "¡¼" ;
+    cout << "\u2591" ;
+#ifdef __linux__
+    cout << "\u2591" ;
+#endif // __linux__
 }
 void DrawBlock( int color ){
     SetColor(color) ;
-    cout << "¢i" ;
+    cout << "\u2586" ;
+#ifdef __linux__
+    cout << "\u2586" ;
+#endif // __linux__
     SetColor(White) ;
 }
 void DrawSpace(  ){
