@@ -4,7 +4,7 @@
 
 const char node[9][2] = { {1,1} , {1,2} , {1,1} , {1,2} , {2,3} , {2,0} , {2,1} , {1,1} , {1,1}} ;
 
-void LoadToBuffer( GameBoard& gb , Block b )
+void LoadToBuffer( GameBoard& gb, Block b )
 {
     for( int i = 0 ; i < 4*4 ; i ++ )
     {
@@ -33,17 +33,17 @@ void LoadToBuffer( GameBoard& gb , Block b )
 }
 
 
-bool Movable( GameBoard& gb , int x , int y )
+bool Movable( GameBoard& gb, int x, int y )
 {
-    for( int i = 0 ; i < SIZE_X  ; ++i )
-        for( int j = 0 ; j < SIZE_Y   ; ++j )
+    for( int i = 0 ; i < SIZE_X ; ++i )
+        for( int j = 0 ; j < SIZE_Y ; ++j )
             if( gb.GetBlock(i,j).GetType() == Shape &&
                     ( !gb.IsValid(i+x,j+y) || gb.GetBlock(i+x,j+y).GetType() == Lock ) )
                         return false ;
 
     return true ;
 }
-void MoveBlock( GameBoard& gb , int x , int y , int desx , int desy )
+void MoveBlock( GameBoard& gb, int x, int y, int desx, int desy )
 {
     if(  !( gb.IsValid( x, y ) && gb.IsValid( desx, desy ) )  ) return ;
 
@@ -70,9 +70,30 @@ bool MoveDown( GameBoard& gb )
         return false;
     }
 }
-void MoveRight( GameBoard&  ) ;
-void MoveLeft( GameBoard& ) ;
-void AllDown( GameBoard& ) ;
+void MoveRight( GameBoard& gb )
+{
+    if( Movable( gb, 0, 1 ) )
+    {
+        for( int i = 0 ; i < SIZE_X ; ++i )
+            for( int j = SIZE_Y - 2  ; j >= 0 ; --j )
+                if( gb.GetBlock(i,j).GetType() == Shape )
+                    MoveBlock( gb, i, j, i, j+1 ) ;
+    }
+}
+void MoveLeft( GameBoard& gb )
+{
+    if( Movable( gb, 0, -1 ) )
+    {
+        for( int i = 0 ; i < SIZE_X ; ++i )
+            for( int j = 1  ; j < SIZE_Y ; ++j )
+                if( gb.GetBlock(i,j).GetType() == Shape )
+                    MoveBlock( gb, i, j, i, j-1 ) ;
+    }
+}
+void AllDown( GameBoard& gb )
+{
+    while( MoveDown(gb) );
+}
 void Rotate( GameBoard& ) ;
 void Showpect( GameBoard& gb ) ;
 void RemShape( GameBoard& gb ) ;

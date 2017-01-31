@@ -4,9 +4,9 @@
 class GameBoard;
 class Block;
 
-void LoadToBuffer( GameBoard& , Block ) ;
+void LoadToBuffer( GameBoard&, Block ) ;
 
-void MoveBlock( GameBoard& gb , int x , int y , int desx , int desy ) ;
+void MoveBlock( GameBoard&, int, int, int, int ) ;
 bool MoveDown( GameBoard&   ) ;
 void MoveRight( GameBoard&  ) ;
 void MoveLeft( GameBoard& ) ;

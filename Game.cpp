@@ -51,13 +51,22 @@ void Game(Mode M)
         do{
             int interact = GetKeyboardInput() ;   /* User input */
 
-            if( interact == Down || clock() - timecounter >= std::max( level_time - line*4 , max_level_time )*CLOCKS_PER_SEC/1000  ) /* down */
+            if( interact == Down || (clock()-timecounter)*1000 >= std::max( level_time - line*4 , max_level_time )*CLOCKS_PER_SEC )
             {
-                timecounter = clock() ;   /* reset time for next */
+                timecounter = clock() ;   /* reset time for next down count */
                 next = !MoveDown( gb ) ;
                 if( next ) Delay(100) ;
                 ShowBoard( gb ) ;
             }
+            if( interact == Left ) MoveLeft( gb ) ;
+            if( interact == Right ) MoveRight( gb ) ;
+            if( interact == Space ){
+                AllDown( gb ) ;
+                next = true ;
+            }
+
+
+            if( interact != 0 ) ShowBoard( gb ) ;   // Refresh
 
         }while(!next);
 
