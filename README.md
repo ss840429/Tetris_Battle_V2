@@ -1,5 +1,6 @@
 # Tetris_Battle
 
+
 ![shot](./pic/pic.jpg)
 
 ## 操作說明
@@ -19,13 +20,15 @@
 ### Windows
 
 ###### Two Players
-![preshot](./pic/preview.jpg)
+![preshot](./pic/Windows_Multi.jpg)
 
 ##### Single Player
-![preshot2](./pic/preview2.jpg)
+![preshot](./pic/Windows_Single.jpg)
      
 ### Linux
 
 ###### Two Players
 
 ##### Single Player
+
+![preshot](./pic/Linux_Single.jpg)
