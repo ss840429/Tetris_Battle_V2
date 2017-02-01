@@ -57,6 +57,9 @@ class Block{
         const BTYPE& GetType() const{
         	return type_ ;
         }
+        const bool& IsNode() const{
+            return isSpinNode_ ;
+        }
         const void Print() const ;
 
 	private:
@@ -65,7 +68,6 @@ class Block{
 		bool isSpinNode_ ;
 
 };
-
 
 
 class GameBoard{

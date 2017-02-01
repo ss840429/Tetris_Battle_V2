@@ -66,6 +66,7 @@ void Game(Mode M)
                 AllDown( gb ) ;
                 next = true ;
             }
+            if( interact == Up )  Rotate( gb ) ;
             if( interact == C && changable )
             {
                 RemShape(gb) ;
