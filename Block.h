@@ -33,6 +33,7 @@ struct Attribute{
 class Block{
 
 	public:
+	    Block(){ Init(); }
 		void Init(){
 			att_.shape = -1 ;
 			att_.color = White ;
@@ -72,6 +73,7 @@ class GameBoard{
 	public:
 		GameBoard():GameBoard(SIZE_X,SIZE_Y) {};
 		GameBoard( int X , int Y ) ;
+        GameBoard( const GameBoard& gb ) ;
 		~GameBoard() ;
 
 		void Init() ;

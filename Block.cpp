@@ -33,6 +33,7 @@ GameBoard::GameBoard( int X , int Y ) {
         for( i = 0 ; i < X ; ++i  )
             gameBoard_[i] = new Block[Y] ;
         sizeX_ = X , sizeY_ = Y ;
+        this->Init();
 	}
 	catch( bad_alloc e ){
         cerr << e.what() ;
@@ -44,6 +45,12 @@ GameBoard::GameBoard( int X , int Y ) {
         }
         sizeX_ = 0 , sizeY_ = 0 ;
 	}
+}
+GameBoard::GameBoard( const GameBoard& gb ): GameBoard(gb.sizeX_, gb.sizeY_)
+{
+    for( int i = 0 ; i < gb.sizeX_ ; ++i )
+        for( int j = 0 ; j < gb.sizeY_ ; ++j )
+            this->gameBoard_[i][j] = gb.gameBoard_[i][j];
 }
 
 GameBoard::~GameBoard() {
