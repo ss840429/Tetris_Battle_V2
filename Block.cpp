@@ -29,7 +29,7 @@ const void Block::Print() const {
 GameBoard::GameBoard( int X , int Y ) {
     int i = -1 ;
 	try{
-        gameBoard_ = new Block*[sizeX_] ;
+        gameBoard_ = new Block*[X] ;
         for( i = 0 ; i < X ; ++i  )
             gameBoard_[i] = new Block[Y] ;
         sizeX_ = X , sizeY_ = Y ;
@@ -45,6 +45,7 @@ GameBoard::GameBoard( int X , int Y ) {
         sizeX_ = 0 , sizeY_ = 0 ;
 	}
 }
+
 GameBoard::~GameBoard() {
     for( int i = 0 ; i < sizeX_ ; ++i ){
         delete[] gameBoard_[i] ;
@@ -57,6 +58,7 @@ void GameBoard::Init() {
         for( int j = 0 ; j < sizeY_ ; ++j )
             gameBoard_[i][j].Init() ;
 }
+
 bool GameBoard::IsEmpty() const{
 	for( int i = 0 ; i < sizeX_ ; ++i )
         for( int j = 0 ; i < sizeY_ ; ++j )
