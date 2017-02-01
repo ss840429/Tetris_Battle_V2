@@ -12,7 +12,7 @@ void MoveRight( GameBoard&  ) ;
 void MoveLeft( GameBoard& ) ;
 void AllDown( GameBoard& ) ;
 void Rotate( GameBoard& ) ;
-void Showpect( GameBoard& gb ) ;
-void RemShape( GameBoard& gb ) ;
+void Showpect( GameBoard& ) ;
+void RemShape( GameBoard& ) ;
 
 #endif // MOVE_H_INCLUDED

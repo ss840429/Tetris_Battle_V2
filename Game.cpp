@@ -27,10 +27,10 @@ void Game(Mode M)
     PMode( M ) ;
 
     CleanScreen() ;
-    GameBoard gb ; gb.Init() ;
+    GameBoard gb ;
 
     Block Cur, Next, Hold ;
-    Cur.GainBlock(), Next.GainBlock(); Hold.Init() ;
+    Cur.GainBlock(), Next.GainBlock();
     LoadToBuffer( gb , Cur ) ;
 
     int score = 0, line = 0, combo = 0 ;
@@ -43,7 +43,8 @@ void Game(Mode M)
     do{
         ShowNextBlock( Next ) ;
         ShowHoldBlock( Hold ) ;
-        ShowScore( score , line , combo ) ;
+        ShowScore( score, line, combo ) ;
+        Showpect( gb );
         ShowBoard( gb ) ;
 
         timecounter = clock() ;
@@ -54,7 +55,7 @@ void Game(Mode M)
 
             if( interact == Down || (clock()-timecounter)*1000 >= std::max( level_time - line*4 , max_level_time )*CLOCKS_PER_SEC )
             {
-                timecounter = clock() ;   /* reset time for next down count */
+                timecounter = clock() ;   /* reset time for next count */
                 next = !MoveDown( gb ) ;
                 if( next ) Delay(100) ;
                 ShowBoard( gb ) ;
@@ -65,16 +66,14 @@ void Game(Mode M)
                 AllDown( gb ) ;
                 next = true ;
             }
-            if( interact == C && changable )     /* C - Hold */
+            if( interact == C && changable )
             {
                 RemShape(gb) ;
-                if( Hold.GetType() == None )  /* Fisrt Hold */
-                {
+                if( Hold.GetType() == None ){  /* Fisrt Hold */
                     Hold = Cur ;
                     next = true ;
                 }
-                else                        /* Swap Hold with Current */
-                {
+                else{
                     std::swap( Hold, Cur ) ;
                     changable = false ;
                     LoadToBuffer( gb, Cur ) ;
@@ -83,7 +82,10 @@ void Game(Mode M)
             }
 
 
-            if( interact != 0 ) ShowBoard( gb ) ;   // Refresh
+            if( interact != 0 ){               // Refresh
+                Showpect( gb );
+                ShowBoard( gb ) ;
+            }
 
         }while(!next);
 

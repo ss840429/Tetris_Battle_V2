@@ -40,7 +40,6 @@ bool Movable( GameBoard& gb, int x, int y )
             if( gb.GetBlock(i,j).GetType() == Shape &&
                     ( !gb.IsValid(i+x,j+y) || gb.GetBlock(i+x,j+y).GetType() == Lock ) )
                         return false ;
-
     return true ;
 }
 void MoveBlock( GameBoard& gb, int x, int y, int desx, int desy )
@@ -95,7 +94,19 @@ void AllDown( GameBoard& gb )
     while( MoveDown(gb) );
 }
 void Rotate( GameBoard& ) ;
-void Showpect( GameBoard& gb ) ;
+void Showpect( GameBoard& gb )
+{
+    int k = 0 ;
+    GameBoard tmpgb(gb) ;
+    while( Movable(tmpgb, 1, 0) && k++ < 20 ){ MoveDown(tmpgb); }
+
+    for( int i = 0 ; i < SIZE_X ; ++i )
+        for( int j = 0  ; j < SIZE_Y ; ++j )
+            if( gb.GetBlock(i,j).GetType() == None && tmpgb.GetBlock(i,j).GetType() == Shape )
+                gb.GetBlock(i,j).SetType(Spect);
+            else if( gb.GetBlock(i,j).GetType() == Spect && tmpgb.GetBlock(i,j).GetType() != Shape )
+                gb.GetBlock(i,j).Init() ;
+}
 void RemShape( GameBoard& gb )
 {
     for( int i = 0 ; i < SIZE_X ; ++i )
