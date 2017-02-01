@@ -1,7 +1,7 @@
-#include "Block.h"
+#include "../include/Block.h"
+#include "../include/CmdMethod.h"
+#include "../include/Game.h"
 #include <iostream>
-#include "CmdMethod.h"
-#include "Game.h"
 
 using namespace std ;
 

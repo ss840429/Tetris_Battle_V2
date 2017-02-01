@@ -2,7 +2,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include "CmdMethod.h"
+#include "../include/CmdMethod.h"
 using namespace std ;
 
 #ifdef _WIN32

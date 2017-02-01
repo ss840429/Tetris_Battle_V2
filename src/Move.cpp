@@ -1,5 +1,5 @@
-#include "Move.h"
-#include "Block.h"
+#include "../include/Move.h"
+#include "../include/Block.h"
 
 const char node[9][2] = { {1,1} , {1,2} , {1,1} , {1,2} , {2,3} , {2,0} , {2,1} , {1,1} , {1,1}} ;
 

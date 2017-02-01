@@ -31,14 +31,16 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Block.cpp" />
-		<Unit filename="Block.h" />
-		<Unit filename="CmdMethod.cpp" />
-		<Unit filename="CmdMethod.h" />
-		<Unit filename="Game.cpp" />
-		<Unit filename="Game.h" />
-		<Unit filename="Loc.h" />
-		<Unit filename="main.cpp" />
+		<Unit filename="include/Block.h" />
+		<Unit filename="include/CmdMethod.h" />
+		<Unit filename="include/Game.h" />
+		<Unit filename="include/Loc.h" />
+		<Unit filename="include/Move.h" />
+		<Unit filename="src/Block.cpp" />
+		<Unit filename="src/CmdMethod.cpp" />
+		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/Move.cpp" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

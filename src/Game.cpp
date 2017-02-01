@@ -1,8 +1,8 @@
-#include "CmdMethod.h"
-#include "Block.h"
-#include "Loc.h"
-#include "Game.h"
-#include "Move.h"
+#include "../include/CmdMethod.h"
+#include "../include/Block.h"
+#include "../include/Loc.h"
+#include "../include/Game.h"
+#include "../include/Move.h"
 #include <stdlib.h>
 #include <algorithm>
 #include <time.h>

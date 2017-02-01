@@ -1,5 +1,5 @@
-#include "CmdMethod.h"
-#include "Block.h"
+#include "../include/CmdMethod.h"
+#include "../include/Block.h"
 #include <iostream>
 using namespace std;
 
