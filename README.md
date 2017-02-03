@@ -1,7 +1,7 @@
 # Tetris_Battle
 
 
-![shot](./pic/pic.jpg)
+<img src="./pic/pic.jpg" width="600" height="400">
 
 ## 操作說明
 
@@ -18,17 +18,9 @@
 ## Preview
 
 ### Windows
-
-###### Two Players
-![preshot](./pic/Windows_Multi.jpg)
-
-##### Single Player
-![preshot](./pic/Windows_Single.jpg)
+<img src="./pic/Windows_Multi.jpg" width="430" height="300">
+<img src="./pic/Windows_Single.jpg" width="430" height="300">
      
 ### Linux
 
-###### Two Players
-
-##### Single Player
-
-![preshot](./pic/Linux_Single.jpg)
+<img src="./pic/Linux_Single.jpg" width="430" height="300">
