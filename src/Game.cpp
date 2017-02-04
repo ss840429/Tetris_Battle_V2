@@ -3,6 +3,7 @@
 #include "../include/Loc.h"
 #include "../include/Game.h"
 #include "../include/Move.h"
+#include "../include/Audio.h"
 #include <stdlib.h>
 #include <algorithm>
 #include <time.h>
@@ -31,14 +32,15 @@ void Game(Mode M)
 
     Block Cur, Next, Hold ;
     Cur.GainBlock(), Next.GainBlock();
-    LoadToBuffer( gb , Cur ) ;
+    initAudio();
 
     int score = 0, line = 0, combo = 0 ;
     int timecounter = 0;
     bool next, changable = true ;
 
     ShowForm() ;
-
+    LoadToBuffer( gb , Cur ) ;
+    playMusic();
 
     do{
         ShowNextBlock( Next ) ;
@@ -72,7 +74,8 @@ void Game(Mode M)
                 RemShape(gb) ;
                 if( Hold.GetType() == None ){  /* Fisrt Hold */
                     Hold = Cur ;
-                    next = true ;
+                    Cur = Next , Next.GainBlock() ;
+                    LoadToBuffer( gb, Cur ) ;
                 }
                 else{
                     std::swap( Hold, Cur ) ;
@@ -92,6 +95,7 @@ void Game(Mode M)
 
         if( next )
         {
+            playSound() ;
             EraseLine( gb, score, line, combo ) ;
             Cur = Next , Next.GainBlock() ;
             changable = true ;
