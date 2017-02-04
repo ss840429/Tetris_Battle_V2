@@ -40,12 +40,6 @@ void playm()
 void plays()
 {
     sound.play();
-
-    while (sound.getStatus() == sf::Sound::Playing)
-    {
-        sf::sleep(sf::milliseconds(100));    // Reduce CPU time
-    }
-
 }
 
 sf::Thread threadm(&playm);
