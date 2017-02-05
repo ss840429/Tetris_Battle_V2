@@ -60,6 +60,13 @@ void Game(Mode M)
                 if( next ) Delay(100) ;
                 ShowBoard( gb ) ;
             }
+            if( interact == Pause )
+            {
+                GoToXY( Pause_X , Pause_Y ) ;
+                ColorText( " ---- || PAUSE ---- " , Red ) ;
+                while( !GetKeyboardInput() ) ;
+
+            }
             if( interact == Left ) MoveLeft( gb ) ;
             if( interact == Right ) MoveRight( gb ) ;
             if( interact == Space ){
